@@ -18,8 +18,7 @@ def sockMerchant(n, ar):
             total += 1
         else:
             loose_socks[item] = True
-    print (total)
-    print (loose_socks)
+    return total
             
 
 

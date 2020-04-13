@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "description": "various coding exercises on different platforms",
   "main": "index.js",
-  "scripts": {
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cmccormack/coding_exercises.git"

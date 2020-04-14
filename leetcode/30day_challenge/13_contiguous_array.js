@@ -25,23 +25,133 @@ Note: The length of the given binary array will not exceed 50,000.
 var findMaxLength = function (nums) {
   let maxlen = 0;
   let count = 0;
-  const collector = { 0: -1 };
+  const collector = new Map();
+  collector.set(0, -1);
 
   for (let i = 0; i < nums.length; i += 1) {
-    count += nums[i] === 0 ? -1 : 1;
+    if (nums[i] === 0) {
+      count += -1;
+    }
+    if (nums[i] === 1) {
+      count += 1;
+    }
 
-    if (count in collector) {
-      maxlen = maxlen > i - collector[count] ? maxlen : i - collector[count];
+    if (collector.has(count)) {
+      maxlen = Math.max(maxlen, i - collector.get(count));
     } else {
-      collector[count] = i;
+      collector.set(count, i);
     }
   }
-
-  console.log(maxlen);
   return maxlen;
 };
 
+console.assert(findMaxLength([0]) === 0, "borked");
 console.assert(findMaxLength([0, 1]) === 2, "borked");
-// console.assert(findMaxLength([0, 1, 0]) === 2, "borked");
-// console.assert(findMaxLength([0, 0, 0, 1, 1]) === 4, "borked");
-// console.assert(findMaxLength([0, 0, 1, 0, 0, 0, 1, 1]) === 6, "borked");
+console.assert(findMaxLength([0, 1, 0]) === 2, "borked");
+console.assert(findMaxLength([0, 0, 0, 1, 1]) === 4, "borked");
+console.assert(findMaxLength([0, 0, 1, 0, 0, 0, 1, 1]) === 6, "borked");
+console.assert(
+  findMaxLength([
+    0,
+    1,
+    0,
+    1,
+    1,
+    1,
+    0,
+    0,
+    1,
+    1,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    1,
+    1,
+    0,
+    1,
+    1,
+    0,
+    0,
+    0,
+    1,
+    0,
+    1,
+    0,
+    0,
+    1,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    0,
+    1,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    0,
+    0,
+    1,
+    0,
+    1,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    1,
+    0,
+    1,
+    1,
+    0,
+    0,
+    1,
+    1,
+    0,
+    1,
+    1,
+    1,
+    1,
+    0,
+    1,
+    1,
+    0,
+    0,
+    0,
+    1,
+    1,
+  ]) === 68,
+  "borked"
+);

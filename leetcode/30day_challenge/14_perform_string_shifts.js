@@ -64,8 +64,7 @@ var stringShift = function (s, shift) {
     shiftMap.set(dir, (shiftMap.get(dir) + amt) % s.length);
   }
   const diff = shiftMap.get(0) - shiftMap.get(1);
-  const result = s.slice(diff) + s.slice(0, diff);
-  return result;
+  return s.slice(diff) + s.slice(0, diff);
 };
 
 console.assert(

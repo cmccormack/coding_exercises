@@ -92,13 +92,4 @@ const grid1 = [
   [4, 2, 1],
 ];
 
-const grid2 = [
-  [1, 90, 1, 1, 1],
-  [1, 9, 1, 9, 1],
-  [1, 9, 1, 9, 1],
-  [1, 90, 1, 9, 1],
-  [1, 1, 1, 9, 1],
-];
-
-timeit(minPathSum2, grid2, "RESULT EXPECTED: 17\t\tTime");
 timeit(minPathSum2, grid1, "RESULT EXPECTED: 7\t\tTime");

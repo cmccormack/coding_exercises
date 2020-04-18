@@ -57,6 +57,8 @@ var minPathSum = function (grid) {
  * @return {number}
  */
 var minPathSum2 = function (grid) {
+  console.log("INPUT:");
+  printGrid(grid);
   const rows = grid.length;
   const cols = grid[0].length;
   for (let row = 0; row < rows; row += 1) {
@@ -78,6 +80,7 @@ var minPathSum2 = function (grid) {
 
 var timeit = function (f, args, label) {
   console.time(label);
+  console.log();
   result = f(args);
   console.log(`RESULT RETURNED: ${result}`);
   console.timeEnd(label);

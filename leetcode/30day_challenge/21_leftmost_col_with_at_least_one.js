@@ -22,14 +22,13 @@ const binMatrix = new BinaryMatrix([
   [0, 0],
   [1, 1],
 ]);
+
+
+
 const binMatrix2 = new BinaryMatrix([
   [0, 0, 0, 1],
   [0, 0, 1, 1],
   [0, 1, 1, 1],
-]);
-const binMatrix3 = new BinaryMatrix([
-  [0, 0],
-  [0, 0],
 ]);
 
 var leftMostColumnWithOne = function (binaryMatrix) {
@@ -48,6 +47,8 @@ var leftMostColumnWithOne = function (binaryMatrix) {
   }
   return minCol === Infinity ? -1 : minCol;
 };
+
+timeit("RESULT EXPECTED: 0\t\tTime", leftMostColumnWithOne, binMatrix);
 
 var timeit = function (label, f, args) {
   console.time(label);

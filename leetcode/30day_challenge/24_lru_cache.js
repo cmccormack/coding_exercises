@@ -53,11 +53,20 @@ var LRUCache = function (capacity) {
  */
 LRUCache.prototype.get = function (key) {
   // Return Node.value or -1 if item not in map
-  if (this.map.get(key)) {
+  const existingNode = this.map.get(key);
+  if (existingNode) {
+    console.log(`Called get with existing node: ${key}...`);
     // Update DLL by removing key Node and readding at head
-
+    this.delete(existingNode);
+    const newNode = new Node(key, existingNode.value);
+    this.add(newNode);
+    this.map.set(key, newNode);
+    console.log(
+      `Called get with ${key}, key found!  returning ${this.map.get(key).value}`
+    );
     return this.map.get(key).value;
   }
+  console.log(`Called get with ${key}, key not found, returning -1`);
   return -1;
 };
 
@@ -67,37 +76,75 @@ LRUCache.prototype.get = function (key) {
  * @return {void}
  */
 LRUCache.prototype.put = function (key, value) {
+  const oldNode = this.map.get(key);
+  const newNode = new Node(key, value);
+
   // Check if value already exists in map
-  if (this.map.get(key)) {
+  if (oldNode) {
     // Move Node with matching key to head of DLL by deleting then readding
-  } else {
-    // Check if at capacity
-    if (this.map.size === this.capacity) {
-      // Remove least recently used Node
-      // Remove key from map
-    }
-    // Add new node to head
-    this.head = new Node(value);
-    this.map.set(key, this.head);
+    this.delete(this.map.get(key));
+    this.map.delete(key);
   }
+  // Check if at capacity
+  if (this.map.size === this.capacity) {
+    console.log(
+      `Called put with new key at full capacity: ${this.map.size} ${this.capacity}`
+    );
+    // Remove key from map
+    this.map.delete(this.tail.key);
+    // Remove least recently used Node
+    this.delete(this.tail);
+  }
+  // Add new node to head and pointer to new Node to map
+  this.add(newNode);
+  this.map.set(key, newNode);
 };
 
-LRUCache.prototype.delete = function (key) {
-  const del_node = this.map.get(key);
-  this.map.delete(key);
+LRUCache.prototype.add = function (node) {
+  const prevHead = this.head;
+  if (!prevHead) {
+    // Empty map
+    this.head = node;
+    this.tail = node;
+  } else {
+    prevHead.next = node;
+    node.prev = prevHead;
+    this.head = node;
+  }
+  console.log(
+    `Added Node(${node.value}).  New:  Head: ${
+      this.head ? this.head.key + "," + this.head.value : null
+    }  Tail: ${this.tail ? this.tail.key + "," + this.tail.value : null}`
+  );
+};
 
-  if (del_node === this.head) {
-    if (del_node.prev) {
-      this.head = del_node.prev;
-      del_node.prev.next = null;
+LRUCache.prototype.delete = function (node) {
+  const del_node = node;
 
-      // Removing last Node in DLL
+  if (del_node.prev) {
+    // Inner Node
+    console.log(`Deleting inner node: ${del_node.key}`);
+    if (del_node.next) {
+      del_node.prev.next = del_node.next;
+      del_node.next.prev = del_node.prev;
+
+      // Head Node
     } else {
-      this.tail = null;
-      this.head = null;
+      console.log(`Deleting Head node: ${del_node.key}`);
+      this.head = del_node.prev;
+      this.head.next = null;
     }
-  } elseif (del_node === this.tail) {
-    
+    // Tail Node
+  } else if (del_node.next) {
+    console.log(`Deleting Tail node: ${del_node.key}`);
+    this.tail = del_node.next;
+    this.tail.prev = null;
+
+    // Lonely Node :(
+  } else {
+    console.log(`Deleting Lonely node: ${del_node.key}`);
+    this.head = null;
+    this.tail = null;
   }
 };
 
@@ -109,16 +156,20 @@ LRUCache.prototype.delete = function (key) {
  *
  */
 
-const cache = new LRUCache(2);
-cache.put(1, 1);
-cache.put(2, 2);
-cache.get(1); // returns 1
-cache.put(3, 3); // evicts key 2
-cache.get(2); // returns -1 (not found)
-cache.put(4, 4); // evicts key 1
-cache.get(1); // returns -1 (not found)
-cache.get(3); // returns 3
-cache.get(4); // returns 4
+// const cache = new LRUCache(2);
+// cache.put(1, 1);
+// console.log(cache.map);
+// cache.put(2, 2);
+// console.log(cache.map);
+// cache.delete(2);
+// console.log(cache.map);
+// cache.get(1); // returns 1
+// cache.put(3, 3); // evicts key 2
+// cache.get(2); // returns -1 (not found)
+// cache.put(4, 4); // evicts key 1
+// cache.get(1); // returns -1 (not found)
+// cache.get(3); // returns 3
+// cache.get(4); // returns 4
 /*
 [null, null]
 [1, null] 1 is newest so value of 2 (capacity)?         {0: 2, 1: null},{1: 0}
@@ -128,3 +179,20 @@ cache.get(4); // returns 4
 
 
 */
+
+// const cache = new LRUCache(2);
+// cache.put(2, 1);
+// cache.put(2, 2);
+// cache.get(2);
+// cache.put(1, 1);
+// cache.put(4, 1);
+// cache.get(2);
+
+const cache = new LRUCache(2);
+cache.get(2);
+cache.put(2, 6);
+cache.get(1);
+cache.put(1, 5);
+cache.put(1, 2);
+cache.get(1);
+cache.get(2);

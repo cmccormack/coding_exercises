@@ -12,11 +12,6 @@ Implement the FirstUnique class:
 
 */
 
-const fs = require("fs");
-const testInput = JSON.parse(
-  fs.readFileSync("first_unique_number_data.json", "utf8")
-);
-
 var Node = function (value) {
   this.value = value;
   this.next = null;

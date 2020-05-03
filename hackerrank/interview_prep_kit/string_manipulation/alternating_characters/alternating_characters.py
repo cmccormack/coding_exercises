@@ -11,13 +11,6 @@ def alternatingCharacters(s):
     if len(s) == 0:
         return 0
 
-    def swap(a, b):
-        temp = a
-        a = b
-        b = temp
-        return a, b
-
-    # print(s)
     count = 0
     current = s[0]
     for letter in s[1:]:

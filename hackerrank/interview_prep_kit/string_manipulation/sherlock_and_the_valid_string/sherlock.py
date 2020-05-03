@@ -23,6 +23,7 @@ def isValid(s):
 
     ci = sorted(list(counts.items()), key=lambda x: x[1])
 
+
     if len(ci) == 1:
         return "YES"
     if len(ci) > 2:

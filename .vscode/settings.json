@@ -7,7 +7,7 @@
     "editor.formatOnSave": true,
     "editor.tabSize": 4,
   },
-  "python.pythonPath": "/Users/chris/.local/share/virtualenvs/coding_exercises-C5csiUor/bin/python",
+  "python.pythonPath": "/home/chris/.local/share/virtualenvs/coding_exercises-JHHZoZGj/bin/python",
   "python.linting.pylintEnabled": true,
   "python.linting.enabled": true,
   "python.formatting.provider": "black",

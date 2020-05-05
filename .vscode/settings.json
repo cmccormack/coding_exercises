@@ -10,5 +10,5 @@
   "python.pythonPath": "/home/chris/.local/share/virtualenvs/coding_exercises-JHHZoZGj/bin/python",
   "python.linting.pylintEnabled": true,
   "python.linting.enabled": true,
-  "python.formatting.provider": "black",
+  "python.formatting.provider": "autopep8",
 }

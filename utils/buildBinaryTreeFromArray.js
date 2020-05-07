@@ -10,7 +10,7 @@ const debug = (...args) => {
   if (debugMode) console.debug(`[BuildTree] `, ...args);
 };
 
-const buildBinaryTreeFromArray = function (arr) {
+const buildBinaryTreeFromArray_old = function (arr) {
   debug(JSON.stringify(arr), arr.length);
   const root = new TreeNode(arr[0]);
   arr[0] = root;
@@ -35,5 +35,45 @@ const buildBinaryTreeFromArray = function (arr) {
   return root;
 };
 
+// Using recursive approach
+const buildBinaryTreeFromArray = (arr, root, i) => {
+  if (i < arr.length) {
+    root = new TreeNode(arr[i]);
+
+    root.left = buildBinaryTreeFromArray(arr, root.left, 2 * i + 1);
+    root.right = buildBinaryTreeFromArray(arr, root.right, 2 * i + 2);
+  }
+
+  return root;
+};
+
+const printInOrder = (root) => {
+  if (root !== null) {
+    printInOrder(root.left);
+    console.log(`${root.val} `);
+    printInOrder(root.right);
+  }
+};
+const printPreOrder = (root) => {
+  let output = "";
+
+  (function preOrder(root) {
+    if (root !== null) {
+      output += `${root.val} `;
+      preOrder(root.left);
+      preOrder(root.right);
+    }
+  })(root);
+
+  console.log(output);
+};
+
+const res = buildBinaryTreeFromArray(
+  [1, 2, 3, 4, 5, 6, 6, 6, 6, 6, null, null],
+  null,
+  0
+);
+// console.log(res);
 exports.TreeNode = TreeNode;
 exports.buildBinaryTreeFromArray = buildBinaryTreeFromArray;
+module.exports = buildBinaryTreeFromArray;

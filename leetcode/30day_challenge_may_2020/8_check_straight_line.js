@@ -6,6 +6,7 @@ const timeit = require("../../utils/timeit");
  */
 var checkStraightLine = function (coordinates) {
   if (coordinates.length === 1) return true;
+  const run = coordinates[1][0] - coordinates[0][1];
 };
 
 timeit(checkStraightLine, true, [

@@ -1,7 +1,8 @@
 {
   "editor.formatOnSave": false,
   "[javascript]": {
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "editor.tabSize": 2
   },
   "[python]": {
     "editor.formatOnSave": true,

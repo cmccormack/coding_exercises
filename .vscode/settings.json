@@ -8,7 +8,7 @@
     "editor.formatOnSave": true,
     "editor.tabSize": 4,
   },
-  "python.pythonPath": "/home/chris/.local/share/virtualenvs/coding_exercises-JHHZoZGj/bin/python",
+  "python.pythonPath": "/home/chris/.local/share/virtualenvs/coding_exercises-b9hpJErt/bin/python",
   "python.linting.pylintEnabled": true,
   "python.linting.enabled": true,
   "python.formatting.provider": "autopep8",
